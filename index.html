@@ -370,7 +370,12 @@
         if (!pwrd) {
             pass_error.innerHTML = "Input your password!";
             valid = false;
-        } else {
+        } 
+        else if(pwrd < 8){
+            pass_error.innerHTML = "Password must be at least 8 characters";
+            valid = false;
+        }
+        else  {
             pass_error.innerHTML = "";
         }
 
