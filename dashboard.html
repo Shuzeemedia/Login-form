@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+            font-family: cursive;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        nav {
+            width: 100%;
+            height: 17vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #080d3b;
+            padding: 0 36px 0;
+            position: sticky;
+            top: 0;
+        }
+
+        #list {
+            display: flex;
+            align-items: center;
+            /* background-color: red; */
+        }
+
+        nav ul {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 40px;
+            /* background-color: red; */
+            height: 100%;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        #burger {
+            display: none;
+        }
+
+        #lite {
+            background: none;
+            border: none;
+        }
+
+        #logo {
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0 5px 0 5px;
+        }
+
+        #sub-header {
+            width: 100%;
+            height: 50vh;
+            /* background-color: #080d3b; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #greet {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            color: #080d3b;
+            font-size: 60px;
+            animation: slide linear .8s;
+        }
+
+        @keyframes slide {
+            from {
+                opacity: 0;
+
+            }
+
+            to {
+                opacity: 1;
+
+            }
+        }
+
+        #section1 {
+            background-color: #080d3b;
+            padding: 30px 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        #cont1 {
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+        }
+
+        #wr_blog {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 0 10px 0 10px;
+            width: 50%;
+        }
+
+        #rowx {
+            width: 100%;
+        }
+
+        #txt1 {
+            font-size: 18px;
+            color: #080d3b;
+        }
+
+        .prompt {
+            font-size: 16px;
+            padding: 10px 5px;
+            border: 2px solid #080d3b;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        #wrp-btn {
+            width: 100%;
+        }
+
+        #btn1 {
+            padding: 8px;
+            background-color: #080d3b;
+            border: 0;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        #btn1:hover,
+        #logOut:hover,
+        #del:hover {
+            transition: all linear .2s;
+            box-shadow: 0 0 8px #080d3b;
+        }
+
+        #logOut {
+            padding: 5px 10px;
+            background-color: #fff;
+            border: 0;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #080d3b;
+        }
+
+        #box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #fff;
+            padding: 20px 20px 10px;
+            border-radius: 0 10px 0 10px;
+            display: flexbox;
+
+            /* width: 50%; */
+        }
+
+        #tle {
+            width: fit-content;
+            padding: 0 5px 5px 0;
+            border-right: 2px solid #080d3b;
+            border-bottom: 2px solid #080d3b;
+            font-weight: bold;
+            color: #080d3b;
+            font-size: 22px;
+        }
+
+        #cont2 {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+            gap: 20px;
+        }
+
+        #optRow {
+            width: 100%;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #del {
+            padding: 4px 8px;
+            background-color: #080d3b;
+            border: 0;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .like {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        i {
+            /* color: red; */
+            font-size: 26px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav>
+        <div id="logo">
+            <a href="#"><img src="images/sqi_logo-removebg-preview.png" width="55px"></a>
+        </div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Threads</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button id="logOut" onclick="out()">Log out</button>
+    </nav>
+
+    <div id="sub-header">
+        <h1 id="greet"></h1>
+    </div>
+
+    <div id="section1">
+        <div id="cont1">
+            <div id="wr_blog">
+                <div id="rowx">
+                    <p id="txt1">Title:</p>
+                    <input type="text" id="titles" class="prompt">
+                </div>
+                <div id="rowx">
+                    <p id="txt1">Description:</p>
+                    <textarea id="desc" class="prompt" role="4"></textarea>
+                </div>
+                <div id="file">
+                    <input type="file" id="filePick" onchange="pickPick()" accept=".png, .jpg">
+                </div>
+                <div id="wrp-btn">
+                    <button id="btn1" onclick="post()">Post</button>
+                </div>
+            </div>
+        </div>
+        <div id="cont2"></div>
+    </div>
+
+    <script>
+        let blogDb = JSON.parse(localStorage.getItem("blogInfos")) || [];
+        let logDb = JSON.parse(localStorage.getItem("logInDatas")) || [];
+        let greets = document.getElementById("greet");
+        let dis = document.getElementById("cont2");
+        let titlex = document.getElementById("titles");
+        let descx = document.getElementById("desc");
+
+        let imageSrc = "";
+
+        // Display welcome message
+        if (logDb.length > 0) {
+            greets.innerText = `Hello ${logDb[0].name}! Welcome!`;
+        }
+
+        function pickPick() {
+            let inputFile = document.getElementById("filePick").files[0];
+            let reader = new FileReader();
+            if (inputFile) {
+                reader.readAsDataURL(inputFile);
+            }
+
+            reader.addEventListener("load", (ev) => {
+                imageSrc = ev.target.result; // Save the image src to a variable
+            });
+        }
+
+        function post() {
+            let titley = titlex.value.trim();
+            let descy = descx.value.trim();
+
+            if (!titley || !descy) {
+                alert("Please fill in both title and description");
+                return;
+            }
+
+            let existing = blogDb.find(item => item.title === titley);
+            if (existing) {
+                alert("Title already exists!");
+                return;
+            }
+
+            let obj = {
+                title: titley,
+                description: descy,
+                image: imageSrc || "https://via.placeholder.com/100", // default if no image selected
+                liked: false
+            };
+
+            blogDb.push(obj);
+            localStorage.setItem("blogInfos", JSON.stringify(blogDb));
+            titlex.value = "";
+            descx.value = "";
+            document.getElementById("filePick").value = "";
+            imageSrc = "";
+            display();
+        }
+
+        function out() {
+            localStorage.removeItem("logInDatas");
+            alert("Logged out successfully");
+            window.location.href = "login.html";
+        }
+
+        function likePost(index) {
+            // Toggle liked value
+            blogDb[index].liked = !blogDb[index].liked;
+
+            // Save to localStorage
+            localStorage.setItem("blogInfos", JSON.stringify(blogDb));
+
+            // Update the specific like button
+            const likeBtn = document.getElementById(`like-${index}`);
+            likeBtn.innerHTML = blogDb[index].liked
+                ? `<i class="bi bi-heart-fill" style="color:red;"></i>`
+                : `<i class="bi bi-heart"></i>`;
+        }
+
+
+        function deletePost(index) {
+            blogDb.splice(index, 1); // Remove specific post
+            localStorage.setItem("blogInfos", JSON.stringify(blogDb));
+            display();
+        }
+
+        function display() {
+            dis.innerHTML = "";
+            blogDb.forEach((blog, index) => {
+                dis.innerHTML += `
+            <div id="box">
+                <img src="${blog.image}" width="100%" alt="Blog image">
+                <div id="tle">${blog.title}</div>
+                <div id="abt">${blog.description}</div>
+                <div id="optRow">
+                    <button onclick="likePost(${index})" id="like-${index}" class = "like">
+                        <i class="bi ${blog.liked ? 'bi-heart-fill' : 'bi-heart'}" style="color: ${blog.liked ? 'red' : 'black'}"></i>
+                    </button>
+                    <button onclick="deletePost(${index})" id="del">Delete</button>
+                </div>
+            </div>
+        `;
+            });
+        }
+
+
+        display();
+    </script>
+</body>

@@ -90,14 +90,7 @@
             border-radius: 10px;
         }
 
-        .prompt_p{
-            font-size: 16px;
-            height: 100%;
-            outline: none;
-            border: none;
-        }
-
-        .prompt::placeholder, .prompt_p::placeholder {
+        .prompt::placeholder {
             color: #000;
         }
 
@@ -289,7 +282,7 @@
             border-radius: 0;
         }
 
-        #show, #show2 {
+        #show{
             background: none;
             border: none;
             cursor: pointer;
@@ -300,9 +293,15 @@
             font-size: 16px;
         }
 
-        #log_in{
-            width: 100%;
-            text-align: center;
+        .prompt_p{
+            font-size: 16px;
+            height: 100%;
+            outline: none;
+            border: none;
+        }
+
+        .prompt::placeholder, .prompt_p::placeholder {
+            color: #000;
         }
     </style>
 </head>
@@ -313,167 +312,32 @@
         <div id="logo">
             <img src="images/sqi_logo-removebg-preview.png" width="80px">
         </div>
-        <div id="row">
-            <input type="text" class="prompt" id="fname" placeholder="Full Name">
-            <span id="fn_error" class="error"></span>
-        </div>
 
         <div id="row">
             <input type="email" class="prompt" id="email" placeholder="Email Address">
-            <span id="em_error" class="error"></span>
+
         </div>
 
         <div id="row">
-            <div id="hld"><input type="password" class="prompt_p" id="pwrd" placeholder="Password"><button id="show"
-                    onclick="showx()"><i class="bi bi-eye-fill"></i></button></div>
-            <span id="pass_error" class="error"></span>
+            <div id="hld"><input type="password" class="prompt_p" id="pwrd" placeholder="Password"><button id="show" onclick="showx()"><i class="bi bi-eye-fill"></i></button></div>
         </div>
 
-        <div id="row">
-            <div id="hld"><input type="password" class="prompt_p" id="con_pwrd" placeholder="Confirm Password"><button
-                    id="show2" onclick="shows()"><i class="bi bi-eye-fill"></i></button></div>
-            <span id="cp_error" class="error"></span>
-        </div>
-
-        <div id="rowz">
-            <div id="wrp_tc">
-                <input type="checkbox" id="t&c">
-                <p>Agree to terms and conditions</p>
-            </div>
-            <span id="tc_error" class="error"></span>
-        </div>
+        <span id="em_error" class="error"></span>
 
         <div id="wrp_btn">
             <input id="btn" type="button" onclick="submit()" value="Submit">
         </div>
-
-        <p id="log_in"><a href="login.html">Login</a></p>
     </div>
-
-    <table>
-        <tr>
-            <th>S/N</th>
-            <th>First Name</th>
-            <th>Email Address</th>
-            <th>Password</th>
-        </tr>
-        <tbody id="table_body">
-
-        </tbody>
-
-    </table>
 
 </body>
 
 </html>
 <script>
-    let fName = document.getElementById("fname");
+
     let mail = document.getElementById("email");
     let pass = document.getElementById("pwrd");
-    let c_pass = document.getElementById("con_pwrd");
-    let terms = document.getElementById("t&c");
-
-    let dataBase = JSON.parse(localStorage.getItem("logData")) || [];
-
-    function submit() {
-        let fname = fName.value.trim();
-        let email = mail.value.trim();
-        let pwrd = pass.value.trim();
-        let cpawrd = c_pass.value.trim();
-        let tc = terms.checked;
-
-        let valid = true; // reset valid on each submit
-        let mailPattern = email.endsWith("@gmail.com") && email.includes(".");
-        let isUsed = dataBase.find((used) => used.mail === email);
-        // console.log(isUsed);
-
-
-        // Full Name validation
-        if (!fname) {
-            fn_error.innerHTML = "Input your full name!";
-            valid = false;
-        } else {
-            fn_error.innerHTML = "";
-        }
-
-        // Email validation
-        if (!email) {
-            em_error.innerHTML = "Input your email address!";
-            valid = false;
-        } else if (!mailPattern) {
-            em_error.innerHTML = "Invalid email format!";
-            valid = false;
-        } else if (isUsed) {
-            em_error.innerHTML = "Email already used!";
-            valid = false;
-        } else {
-            em_error.innerHTML = "";
-        }
-
-        // Password validation
-        if (!pwrd) {
-            pass_error.innerHTML = "Input your password!";
-            valid = false;
-        }
-        else if (pwrd < 8) {
-            pass_error.innerHTML = "Password must be at least 8 characters";
-            valid = false;
-        }
-        else {
-            pass_error.innerHTML = "";
-        }
-
-        // Confirm Password validation
-        if (!cpawrd) {
-            cp_error.innerHTML = "Confirm your password!";
-            valid = false;
-        } else if (pwrd !== cpawrd) {
-            cp_error.innerHTML = "Passwords do not match!";
-            valid = false;
-        } else {
-            cp_error.innerHTML = "";
-        }
-
-        // Terms & Conditions checkbox validation
-        if (!tc) {
-            tc_error.innerHTML = "Agree to terms and conditions!";
-            valid = false;
-        } else {
-            tc_error.innerHTML = "";
-        }
-
-        // Final submission if valid
-        if (valid) {
-            let newData = {
-                fullName: fname,
-                mail: email,
-                password: pwrd
-            };
-
-            dataBase.push(newData);
-            localStorage.setItem("logData", JSON.stringify(dataBase));
-            alert("Registration Successful!");
-
-            // Add to table
-            updateTable();
-
-            // Clear inputs
-            fName.value = "";
-            mail.value = "";
-            pass.value = "";
-            c_pass.value = "";
-            terms.checked = false;
-
-            window.location.href = "login.html" // redirect the user when signed in to your login then your login to your dashboard(welcome user name, input that ask for blog title, and description with a post button that will be showing on the dashboard after the btn is clicked. also no two or more gig title should be the same)
-        }
-    }
-
-    function shows() {
-        let check1 = document.getElementById("show2")
-
-        c_pass.type === "password" ? (c_pass.type = "text", check1.innerHTML = "<i class='bi bi-eye-slash-fill'></i>") : (c_pass.type = "password", check1.innerHTML = "<i class='bi bi-eye-fill'></i>")
-
-    }
+    let logDb = JSON.parse(localStorage.getItem("logInDatas")) || []
+    let dataBase = JSON.parse(localStorage.getItem("logData"));
 
     function showx() {
         let check1 = document.getElementById("show")
@@ -481,22 +345,42 @@
         pass.type === "password" ? (pass.type = "text", check1.innerHTML = "<i class='bi bi-eye-slash-fill'></i>") : (pass.type = "password", check1.innerHTML = "<i class='bi bi-eye-fill'></i>")
     }
 
-    function updateTable() {
-        let tableBody = document.getElementById("table_body");
-        tableBody.innerHTML = "";
+    function submit() {
+        let email = mail.value.trim();
+        let pwrd = pass.value.trim();
 
-        dataBase.forEach((user, index) => {
-            tableBody.innerHTML += `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${user.fullName}</td>
-                    <td>${user.mail}</td>
-                    <td>${user.password}</td>
-                </tr>
-            `;
-        });
+        let valid = true; // reset valid on each submit
+        let isaUser = dataBase.find((user) => user.mail === email);// this holds the object where the corresponding email is located
+        let isaUserPass = isaUser.password === pwrd //checking the password in that same obj
+        // console.log(isUsed);
+
+        // Email validation
+        if (!isaUser || !isaUserPass) {
+            em_error.innerHTML = "Ivalid email address or password";
+            valid = false;
+        }
+        else {
+            em_error.innerHTML = "";
+        }
+
+        // Final submission if valid
+        if (valid) {
+            let newLogData = {
+                Mail: email,
+                Password: pwrd,
+                name: isaUser.fullName
+            };
+
+            logDb.push(newLogData);
+            localStorage.setItem("logInDatas", JSON.stringify(logDb));
+
+            alert("Logged in Successfully!");
+
+            // Clear inputs
+            mail.value = "";
+            pass.value = "";
+
+            window.location.href = "dashboard.html" // redirect the user when signed in to your login then your login to your dashboard(welcome user name, input that ask for blog title, and description with a post button that will be showing on the dashboard after the btn is clicked. also no two or more gig title should be the same)
+        }
     }
-
-    // Load table on page load
-    updateTable();
 </script>
